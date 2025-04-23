@@ -1,0 +1,29 @@
+name: Auto Post to GitHub
+
+on:
+  schedule:
+    - cron: '0 23 * * *'  # 매일 오전 8시(KST)
+  workflow_dispatch:
+
+jobs:
+  post:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.10'
+
+      - name: Install dependencies
+        run: pip install requests markdownify
+
+      - name: Run auto post script
+        env:
+          EMAIL_RECEIVER: dkzhs0405@nate.com
+          TISTORY_TOKEN: ${{ secrets.TISTORY_TOKEN }}
+          TISTORY_BLOG_NAME: ${{ secrets.TISTORY_BLOG_NAME }}
+        run: python generate_post.py
