@@ -1,2 +1,3 @@
 # .gitignore에 .env 추가
 .env
+.env
