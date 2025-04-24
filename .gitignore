@@ -1,3 +1,10 @@
 # .gitignore에 .env 추가
 .env
 .env
+echo "auto_push.py" >> .gitignore
+git rm --cached auto_push.py
+git add .gitignore
+git commit -m "add auto_push.py to .gitignore to prevent future commits"
+git push
+.env
+auto_push.py
